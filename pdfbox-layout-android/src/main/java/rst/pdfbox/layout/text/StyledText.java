@@ -14,7 +14,7 @@ public class StyledText implements TextFragment {
 
     private final String text;
     private final FontDescriptor fontDescriptor;
-    private final int color;
+    private final Integer color;
     private final float leftMargin;
     private final float rightMargin;
     private final float baselineOffset;
@@ -165,7 +165,7 @@ public class StyledText implements TextFragment {
     }
 
     @Override
-    public int getColor() {
+    public Integer getColor() {
         return color;
     }
 

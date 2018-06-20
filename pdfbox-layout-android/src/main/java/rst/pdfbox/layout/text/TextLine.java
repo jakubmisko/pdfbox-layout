@@ -176,7 +176,7 @@ public class TextLine implements TextSequence {
 
         FontDescriptor lastFontDesc = null;
         float lastBaselineOffset = 0;
-        int lastColor = -1;
+        Integer lastColor = null;
         float gap = 0;
         for (StyledText styledText : styledTextList) {
             if (!styledText.getFontDescriptor().equals(lastFontDesc)) {
@@ -184,7 +184,7 @@ public class TextLine implements TextSequence {
                 contentStream.setFont(lastFontDesc.getFont(),
                         lastFontDesc.getSize());
             }
-            if (styledText.getColor() != lastColor) {
+            if (!styledText.getColor().equals(lastColor)) {
                 lastColor = styledText.getColor();
                 contentStream.setNonStrokingColor(ColorConverter.convert(lastColor));
             }

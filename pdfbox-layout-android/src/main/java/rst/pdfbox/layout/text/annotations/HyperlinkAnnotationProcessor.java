@@ -159,7 +159,7 @@ public class HyperlinkAnnotationProcessor implements AnnotationProcessor {
 
     private static class Hyperlink {
 	private final PDRectangle rect;
-	private final int color;
+        private final Integer color;
 	private final String hyperlinkUri;
 	private final LinkStyle linkStyle;
 
@@ -175,7 +175,7 @@ public class HyperlinkAnnotationProcessor implements AnnotationProcessor {
 	    return rect;
 	}
 
-	public int getColor() {
+        public Integer getColor() {
 	    return color;
 	}
 

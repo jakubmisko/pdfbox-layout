@@ -20,7 +20,7 @@ public class ControlFragment implements TextFragment {
     private String name;
     private String text;
     private FontDescriptor fontDescriptor;
-    private int color;
+    private Integer color;
 
     protected ControlFragment(final String text,
 	    final FontDescriptor fontDescriptor) {
@@ -63,7 +63,7 @@ public class ControlFragment implements TextFragment {
     }
 
     @Override
-    public int getColor() {
+    public Integer getColor() {
 	return color;
     }
 

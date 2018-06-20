@@ -1,6 +1,5 @@
 package rst.pdfbox.layout.text;
 
-import android.graphics.Color;
 import android.support.annotation.ColorInt;
 
 /**
@@ -23,5 +22,6 @@ public interface TextFragment extends Area {
     /**
      * @return the color to use to draw the text.
      */
-    @ColorInt int getColor();
+    @ColorInt
+    Integer getColor();
 }
