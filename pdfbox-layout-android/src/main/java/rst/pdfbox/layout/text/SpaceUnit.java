@@ -10,24 +10,25 @@ public enum SpaceUnit {
     /**
      * The average character width of the associated font.
      */
-    em, 
+    em,
     /**
      * Measuring in points.
      */
     pt;
-    
+
     /**
      * Converts the given unit to pt.
-     * @param size the size with respect to the unit.
+     *
+     * @param size           the size with respect to the unit.
      * @param fontDescriptor the font/size to use.
      * @return the size in pt.
      * @throws IOException by pdfbox
      */
     public float toPt(final float size, final FontDescriptor fontDescriptor) throws IOException {
-	if (this == em) {
-		return fontDescriptor.getSize()
-			* fontDescriptor.getFont().getAverageFontWidth() / 1000 * size;
-	}
-	return size;
+        if (this == em) {
+            return fontDescriptor.getSize()
+                    * fontDescriptor.getFont().getAverageFontWidth() / 1000 * size;
+        }
+        return size;
     }
 }

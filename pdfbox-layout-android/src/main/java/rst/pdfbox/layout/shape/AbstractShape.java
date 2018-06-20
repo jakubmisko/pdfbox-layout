@@ -11,7 +11,6 @@ import java.io.IOException;
 import rst.pdfbox.layout.text.DrawListener;
 import rst.pdfbox.layout.text.Position;
 import rst.pdfbox.layout.util.ColorConverter;
-import rst.pdfbox.layout.util.CompatibilityHelper;
 
 /**
  * Abstract base class for shapes which performs the
@@ -24,41 +23,41 @@ public abstract class AbstractShape implements Shape {
 
     @Override
     public void draw(PDDocument pdDocument, PDPageContentStream contentStream,
-					 Position upperLeft, float width, float height, @ColorInt Integer color,
-					 Stroke stroke, DrawListener drawListener) throws IOException {
+                     Position upperLeft, float width, float height, @ColorInt Integer color,
+                     Stroke stroke, DrawListener drawListener) throws IOException {
 
-	add(pdDocument, contentStream, upperLeft, width, height);
+        add(pdDocument, contentStream, upperLeft, width, height);
 
-	if (stroke != null) {
-	    stroke.applyTo(contentStream);
-	}
-	if (color != null) {
-	    contentStream.setStrokingColor(ColorConverter.convert(color));
-	}
-	contentStream.stroke();
+        if (stroke != null) {
+            stroke.applyTo(contentStream);
+        }
+        if (color != null) {
+            contentStream.setStrokingColor(ColorConverter.convert(color));
+        }
+        contentStream.stroke();
 
-	if (drawListener != null) {
-	    drawListener.drawn(this, upperLeft, width, height);
-	}
+        if (drawListener != null) {
+            drawListener.drawn(this, upperLeft, width, height);
+        }
 
     }
 
     @Override
     public void fill(PDDocument pdDocument, PDPageContentStream contentStream,
-	    Position upperLeft, float width, float height, @ColorInt Integer color,
-	    DrawListener drawListener) throws IOException {
+                     Position upperLeft, float width, float height, @ColorInt Integer color,
+                     DrawListener drawListener) throws IOException {
 
-	add(pdDocument, contentStream, upperLeft, width, height);
+        add(pdDocument, contentStream, upperLeft, width, height);
 
-		if (color != null) {
-			contentStream.setStrokingColor(ColorConverter.convert(color));
-		}
-	contentStream.fill();
+        if (color != null) {
+            contentStream.setStrokingColor(ColorConverter.convert(color));
+        }
+        contentStream.fill();
 //	CompatibilityHelper.fillNonZero(contentStream);
 
-	if (drawListener != null) {
-	    drawListener.drawn(this, upperLeft, width, height);
-	}
+        if (drawListener != null) {
+            drawListener.drawn(this, upperLeft, width, height);
+        }
 
     }
 

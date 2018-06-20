@@ -27,38 +27,40 @@ public class EnumeratorFactory {
     private final static Map<String, Class<? extends Enumerator>> ENUMERATORS = new ConcurrentHashMap<String, Class<? extends Enumerator>>();
 
     static {
-	register("1", ArabicEnumerator.class);
-	register("I", RomanEnumerator.class);
-	register("i", LowerCaseRomanEnumerator.class);
-	register("A", AlphabeticEnumerator.class);
-	register("a", LowerCaseAlphabeticEnumerator.class);
+        register("1", ArabicEnumerator.class);
+        register("I", RomanEnumerator.class);
+        register("i", LowerCaseRomanEnumerator.class);
+        register("A", AlphabeticEnumerator.class);
+        register("a", LowerCaseAlphabeticEnumerator.class);
     }
 
     /**
      * Registers an Enumerator class for a given key.
-     * @param key the key (character) used in markup.
+     *
+     * @param key             the key (character) used in markup.
      * @param enumeratorClass the enumerator class.
      */
     public static void register(final String key,
-	    final Class<? extends Enumerator> enumeratorClass) {
-	ENUMERATORS.put(key, enumeratorClass);
+                                final Class<? extends Enumerator> enumeratorClass) {
+        ENUMERATORS.put(key, enumeratorClass);
     }
 
     /**
      * Creates an Enumerator for the given key.
+     *
      * @param key the key of the enumerator.
      * @return the created enumerator.
      */
     public static Enumerator createEnumerator(final String key) {
-	Class<? extends Enumerator> enumeratorClass = ENUMERATORS.get(key);
-	if (enumeratorClass == null) {
-	    throw new IllegalArgumentException("no enumerator found for '"
-		    + key + "'");
-	}
-	try {
-	    return enumeratorClass.newInstance();
-	} catch (Exception e) {
-	    throw new RuntimeException("failed to create enumerator", e);
-	}
+        Class<? extends Enumerator> enumeratorClass = ENUMERATORS.get(key);
+        if (enumeratorClass == null) {
+            throw new IllegalArgumentException("no enumerator found for '"
+                    + key + "'");
+        }
+        try {
+            return enumeratorClass.newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("failed to create enumerator", e);
+        }
     }
 }

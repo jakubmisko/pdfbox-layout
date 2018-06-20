@@ -11,7 +11,6 @@ import com.tom_roush.pdfbox.pdmodel.interactive.annotation.PDAnnotation;
 import com.tom_roush.pdfbox.pdmodel.interactive.annotation.PDAnnotationLink;
 import com.tom_roush.pdfbox.pdmodel.interactive.annotation.PDBorderStyleDictionary;
 import com.tom_roush.pdfbox.pdmodel.interactive.documentnavigation.destination.PDDestination;
-import com.tom_roush.pdfbox.util.Matrix;
 
 import rst.pdfbox.layout.text.annotations.Annotations.HyperlinkAnnotation.LinkStyle;
 

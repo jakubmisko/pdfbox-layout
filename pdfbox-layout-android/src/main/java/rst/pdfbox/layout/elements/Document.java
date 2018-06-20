@@ -50,9 +50,9 @@ public class Document implements RenderListener {
      * Creates a Document in A4 with orientation portrait and the given margins.
      * By default, a {@link VerticalLayout} is used.
      *
-     * @param marginLeft the left margin
-     * @param marginRight the right margin
-     * @param marginTop the top margin
+     * @param marginLeft   the left margin
+     * @param marginRight  the right margin
+     * @param marginTop    the top margin
      * @param marginBottom the bottom margin
      */
     public Document(float marginLeft, float marginRight, float marginTop,
@@ -78,10 +78,10 @@ public class Document implements RenderListener {
      * Creates a Document based on the given media box and margins. By default,
      * a {@link VerticalLayout} is used.
      *
-     * @param mediaBox the media box to use.
-     * @param marginLeft the left margin
-     * @param marginRight the right margin
-     * @param marginTop the top margin
+     * @param mediaBox     the media box to use.
+     * @param marginLeft   the left margin
+     * @param marginRight  the right margin
+     * @param marginTop    the top margin
      * @param marginBottom the bottom margin
      * @deprecated use {@link #Document(PageFormat)} instead.
      */
@@ -114,7 +114,7 @@ public class Document implements RenderListener {
     /**
      * Adds an element with the given layout hint.
      *
-     * @param element the element to add
+     * @param element    the element to add
      * @param layoutHint the hint for the {@link Layout}.
      */
     public void add(final Element element, final LayoutHint layoutHint) {

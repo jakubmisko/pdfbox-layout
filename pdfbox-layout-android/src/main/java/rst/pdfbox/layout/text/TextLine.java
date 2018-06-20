@@ -168,7 +168,8 @@ public class TextLine implements TextSequence {
         float y = upperLeft.getY() - getAscent(); // the baseline
         float offset = TextSequenceUtil.getOffset(this, availableLineWidth, alignment);
         x += offset;
-        contentStream.setTextMatrix(new Matrix(0f, 0f, 0f, 0f, x, y));
+
+        contentStream.setTextMatrix(new Matrix(1f, 0f, 0f, 1f, x, y));
         float extraWordSpacing = 0;
         if (alignment == Alignment.Justify && (getNewLine() instanceof WrappingNewLine)) {
             extraWordSpacing = (availableLineWidth - getWidth()) / (styledTextList.size() - 1);

@@ -11,26 +11,27 @@ public class NewLine extends ControlFragment {
      * {@link ControlFragment#DEFAULT_FONT_DESCRIPTOR}.
      */
     public NewLine() {
-	this(DEFAULT_FONT_DESCRIPTOR);
+        this(DEFAULT_FONT_DESCRIPTOR);
     }
 
     /**
      * Creates a new line with the
      * {@link ControlFragment#DEFAULT_FONT_DESCRIPTOR}'s font and the given
      * height.
+     *
      * @param fontSize the font size, resp. the height of the new line.
      */
     public NewLine(final float fontSize) {
-	this(new FontDescriptor(DEFAULT_FONT_DESCRIPTOR.getFont(), fontSize));
+        this(new FontDescriptor(DEFAULT_FONT_DESCRIPTOR.getFont(), fontSize));
     }
 
     /**
      * Creates a new line with the given font descriptor.
-     * 
+     *
      * @param fontDescriptor the font and size associated with this new line.
      */
     public NewLine(final FontDescriptor fontDescriptor) {
-	super("\n", fontDescriptor);
+        super("\n", fontDescriptor);
     }
 
 }

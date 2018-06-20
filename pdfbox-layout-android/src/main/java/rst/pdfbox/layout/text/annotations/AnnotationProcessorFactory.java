@@ -14,36 +14,35 @@ public class AnnotationProcessorFactory {
     private final static List<Class<? extends AnnotationProcessor>> ANNOTATION_PROCESSORS = new CopyOnWriteArrayList<Class<? extends AnnotationProcessor>>();
 
     static {
-	register(HyperlinkAnnotationProcessor.class);
-	register(UnderlineAnnotationProcessor.class);
+        register(HyperlinkAnnotationProcessor.class);
+        register(UnderlineAnnotationProcessor.class);
     }
 
     /**
      * Use this method to register your (custom) annotation processors.
-     * 
-     * @param annotationProcessor
-     *            the processor to register.
+     *
+     * @param annotationProcessor the processor to register.
      */
     public static void register(
-	    final Class<? extends AnnotationProcessor> annotationProcessor) {
-	ANNOTATION_PROCESSORS.add(annotationProcessor);
+            final Class<? extends AnnotationProcessor> annotationProcessor) {
+        ANNOTATION_PROCESSORS.add(annotationProcessor);
     }
 
     /**
      * @return a (new) instance of all available annotation processors, both
-     *         built-in and custom.
+     * built-in and custom.
      */
     public static Iterable<AnnotationProcessor> createAnnotationProcessors() {
-	List<AnnotationProcessor> annotationProcessors = new ArrayList<AnnotationProcessor>();
-	for (Class<? extends AnnotationProcessor> annotationProcessorClass : ANNOTATION_PROCESSORS) {
-	    try {
-		annotationProcessors
-			.add(annotationProcessorClass.newInstance());
-	    } catch (Exception e) {
-		throw new RuntimeException(
-			"failed to create AnnotationProcessor", e);
-	    }
-	}
-	return annotationProcessors;
+        List<AnnotationProcessor> annotationProcessors = new ArrayList<AnnotationProcessor>();
+        for (Class<? extends AnnotationProcessor> annotationProcessorClass : ANNOTATION_PROCESSORS) {
+            try {
+                annotationProcessors
+                        .add(annotationProcessorClass.newInstance());
+            } catch (Exception e) {
+                throw new RuntimeException(
+                        "failed to create AnnotationProcessor", e);
+            }
+        }
+        return annotationProcessors;
     }
 }

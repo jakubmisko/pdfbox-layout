@@ -18,7 +18,7 @@ public interface DrawContext {
      * @return the current page to draw to.
      */
     public PDPage getCurrentPage();
-    
+
     /**
      * @return the current page content stream.
      */

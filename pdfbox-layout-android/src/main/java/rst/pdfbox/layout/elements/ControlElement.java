@@ -14,12 +14,12 @@ public class ControlElement implements Element {
     private String name;
 
     public ControlElement(final String name) {
-	this.name = name;
+        this.name = name;
     }
 
     @Override
     public String toString() {
-	return "ControlElement [NEWPAGE=" + NEWPAGE + ", name=" + name + "]";
+        return "ControlElement [NEWPAGE=" + NEWPAGE + ", name=" + name + "]";
     }
 
 }

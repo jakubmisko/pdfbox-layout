@@ -6,24 +6,24 @@ package rst.pdfbox.layout.text;
 public class ReplacedWhitespace extends ControlFragment {
 
     private String replacedSpace;
-    
-    public ReplacedWhitespace(String replacedSpace, FontDescriptor fontDescriptor) {
-	super("", fontDescriptor);
 
-	this.replacedSpace = replacedSpace;
+    public ReplacedWhitespace(String replacedSpace, FontDescriptor fontDescriptor) {
+        super("", fontDescriptor);
+
+        this.replacedSpace = replacedSpace;
     }
 
     /**
      * @return the replaced space.
      */
     public String getReplacedSpace() {
-	return replacedSpace;
+        return replacedSpace;
     }
-    
+
     /**
      * @return the replaced fragment.
      */
     public TextFragment toReplacedFragment() {
-	return new StyledText(getReplacedSpace(), getFontDescriptor());
+        return new StyledText(getReplacedSpace(), getFontDescriptor());
     }
 }
