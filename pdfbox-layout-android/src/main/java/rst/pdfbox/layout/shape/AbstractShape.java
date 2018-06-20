@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import rst.pdfbox.layout.text.DrawListener;
 import rst.pdfbox.layout.text.Position;
+import rst.pdfbox.layout.util.ColorConverter;
 import rst.pdfbox.layout.util.CompatibilityHelper;
 
 /**
@@ -32,7 +33,7 @@ public abstract class AbstractShape implements Shape {
 	    stroke.applyTo(contentStream);
 	}
 	if (color != null) {
-	    contentStream.setStrokingColor(Color.red(color), Color.green(color), Color.blue(color));
+	    contentStream.setStrokingColor(ColorConverter.convert(color));
 	}
 	contentStream.stroke();
 
@@ -50,7 +51,7 @@ public abstract class AbstractShape implements Shape {
 	add(pdDocument, contentStream, upperLeft, width, height);
 
 		if (color != null) {
-			contentStream.setStrokingColor(Color.red(color), Color.green(color), Color.blue(color));
+			contentStream.setStrokingColor(ColorConverter.convert(color));
 		}
 	contentStream.fill();
 //	CompatibilityHelper.fillNonZero(contentStream);

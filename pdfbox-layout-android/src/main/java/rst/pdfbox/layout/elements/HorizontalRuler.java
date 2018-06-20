@@ -12,6 +12,7 @@ import rst.pdfbox.layout.shape.Stroke;
 import rst.pdfbox.layout.text.DrawListener;
 import rst.pdfbox.layout.text.Position;
 import rst.pdfbox.layout.text.WidthRespecting;
+import rst.pdfbox.layout.util.ColorConverter;
 
 /**
  * A horizontal ruler that adjust its width to the given
@@ -76,7 +77,7 @@ public class HorizontalRuler implements Drawable, Element, WidthRespecting {
     public void draw(PDDocument pdDocument, PDPageContentStream contentStream,
                      Position upperLeft, DrawListener drawListener) throws IOException {
 	if (color != null) {
-	    contentStream.setStrokingColor(Color.red(color), Color.green(color), Color.blue(color));
+	    contentStream.setStrokingColor(ColorConverter.convert(color));
 	}
 	if (getStroke() != null) {
 	    getStroke().applyTo(contentStream);
