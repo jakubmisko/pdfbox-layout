@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import rst.pdfbox.layout.util.CompatibilityHelper;
+import rst.pdfbox.layout.util.ColorConverter;
 
 /**
  * A text of line containing only {@link StyledText}s. It may be terminated by a
@@ -186,7 +186,7 @@ public class TextLine implements TextSequence {
             }
             if (styledText.getColor() != lastColor) {
                 lastColor = styledText.getColor();
-                contentStream.setNonStrokingColor(lastColor);
+                contentStream.setNonStrokingColor(ColorConverter.convert(lastColor));
             }
             if (styledText.getLeftMargin() > 0) {
                 gap += styledText.getLeftMargin();
