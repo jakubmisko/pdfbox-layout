@@ -128,19 +128,19 @@ public class TableDrawer {
 
     private void drawCellBackground(final Cell cell, final float startX, final float startY, final float width, final float height)
             throws IOException {
-        contentStream.setNonStrokingColor(cell.getBackgroundColor());
+        contentStream.setNonStrokingColor(ColorConverter.convert(cell.getBackgroundColor()));
 
         contentStream.addRect(startX, startY, width, height);
         contentStream.fill();
         contentStream.closePath();
 
         // Reset NonStroking Color to default value
-        contentStream.setNonStrokingColor(Color.BLACK);
+        contentStream.setNonStrokingColor(ColorConverter.convert(Color.BLACK));
     }
 
     private void drawCellText(final Cell cell, final float columnWidth, final float moveX, final float moveY) throws IOException {
         contentStream.beginText();
-        contentStream.setNonStrokingColor(cell.getTextColor());
+        contentStream.setNonStrokingColor(ColorConverter.convert(cell.getTextColor()));
         contentStream.setFont(table.getFont(), table.getFontSize());
 
         float xOffset = moveX + cell.getPaddingLeft();
