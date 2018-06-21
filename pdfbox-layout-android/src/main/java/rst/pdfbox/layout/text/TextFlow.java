@@ -1,5 +1,7 @@
 package rst.pdfbox.layout.text;
 
+import android.support.annotation.ColorInt;
+
 import com.tom_roush.pdfbox.pdmodel.PDPageContentStream;
 import com.tom_roush.pdfbox.pdmodel.font.PDFont;
 
@@ -73,9 +75,22 @@ public class TextFlow implements TextSequence, WidthRespecting {
      * @param font     the font to use to draw the text.
      * @throws IOException by PDFBox
      */
-    public void addText(final String text, final float fontSize,
-                        final PDFont font) throws IOException {
+    public void addText(final String text, final float fontSize, final PDFont font) throws IOException {
         add(TextFlowUtil.createTextFlow(text, fontSize, font));
+    }
+
+    /**
+     * Adds some text associated with the font to draw. The text may contain
+     * line breaks ('\n').
+     *
+     * @param text     the text to add.
+     * @param fontSize the size of the font.
+     * @param font     the font to use to draw the text.
+     * @param color    the color of text.
+     * @throws IOException by PDFBox
+     */
+    public void addText(final String text, final float fontSize, final PDFont font, @ColorInt final int color) throws IOException {
+        add(TextFlowUtil.createTextFlow(text, fontSize, font, color));
     }
 
     /**
