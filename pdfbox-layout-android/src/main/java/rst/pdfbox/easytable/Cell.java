@@ -3,6 +3,8 @@ package rst.pdfbox.easytable;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
 
+import com.tom_roush.pdfbox.pdmodel.font.PDFont;
+
 
 public class Cell {
 
@@ -16,6 +18,7 @@ public class Cell {
     private final String text;
     private Integer backgroundColor;
     private Integer textColor = Color.BLACK;
+    private PDFont font;
 
     private float paddingLeft = 4;
     private float paddingRight = 4;
@@ -50,12 +53,21 @@ public class Cell {
                 .setBorderWidthTop(borderWith);
     }
 
+    public PDFont getFont() {
+        return font;
+    }
+
+    public void setFont(PDFont font) {
+        this.font = font;
+    }
+
     public Row getRow() {
         return row;
     }
 
-    public void setRow(final Row row) {
+    public Cell setRow(final Row row) {
         this.row = row;
+        return this;
     }
 
     public String getText() {

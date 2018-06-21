@@ -141,7 +141,7 @@ public class TableDrawer {
     private void drawCellText(final Cell cell, final float columnWidth, final float moveX, final float moveY) throws IOException {
         contentStream.beginText();
         contentStream.setNonStrokingColor(ColorConverter.convert(cell.getTextColor()));
-        contentStream.setFont(table.getFont(), table.getFontSize());
+        contentStream.setFont(cell.getFont() != null ? cell.getFont() : table.getFont(), table.getFontSize());
 
         float xOffset = moveX + cell.getPaddingLeft();
         final float yOffset = moveY + cell.getPaddingBottom();
