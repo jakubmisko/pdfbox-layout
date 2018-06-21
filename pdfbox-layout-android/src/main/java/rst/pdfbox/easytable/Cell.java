@@ -200,8 +200,9 @@ public class Cell {
         }
     }
 
-    public void setBorderColor(@ColorInt Integer borderColor) {
+    public Cell setBorderColor(@ColorInt Integer borderColor) {
         this.borderColor = borderColor;
+        return this;
     }
 
     public Integer getParentBorderColor() {
@@ -212,12 +213,9 @@ public class Cell {
         return textColor;
     }
 
-    public void setTextColor(@ColorInt Integer textColor) {
+    public Cell setTextColor(@ColorInt Integer textColor) {
         this.textColor = textColor;
-    }
-
-    public Cell withTextColor(@ColorInt Integer color) {
-        this.textColor = color;
         return this;
     }
+
 }
