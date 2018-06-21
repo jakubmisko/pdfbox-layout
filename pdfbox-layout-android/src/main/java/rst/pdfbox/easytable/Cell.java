@@ -57,17 +57,17 @@ public class Cell {
         return font;
     }
 
-    public void setFont(PDFont font) {
+    public Cell setFont(PDFont font) {
         this.font = font;
+        return this;
     }
 
     public Row getRow() {
         return row;
     }
 
-    public Cell setRow(final Row row) {
+    public void setRow(final Row row) {
         this.row = row;
-        return this;
     }
 
     public String getText() {
