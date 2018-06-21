@@ -1,6 +1,7 @@
 package rst.pdfbox.layout.text;
 
 import android.graphics.Color;
+import android.support.annotation.ColorInt;
 
 import com.tom_roush.pdfbox.pdmodel.font.PDFont;
 
@@ -38,10 +39,13 @@ public class TextFlowUtil {
      * @return the created text flow.
      * @throws IOException by pdfbox
      */
-    public static TextFlow createTextFlow(final String text,
-                                          final float fontSize, final PDFont font) throws IOException {
+    public static TextFlow createTextFlow(final String text, final float fontSize, final PDFont font, @ColorInt Integer color) throws IOException {
         final Iterable<CharSequence> parts = fromPlainText(text);
-        return createTextFlow(parts, fontSize, font, font, font, font);
+        return createTextFlow(parts, fontSize, font, font, font, font, color);
+    }
+
+    public static TextFlow createTextFlow(final String text, final float fontSize, final PDFont font) throws IOException {
+        return createTextFlow(text, fontSize, font, null);
     }
 
     /**
@@ -57,8 +61,7 @@ public class TextFlowUtil {
      * @return the created text flow.
      * @throws IOException by pdfbox
      */
-    public static TextFlow createTextFlowFromMarkup(final String markup,
-                                                    final float fontSize, final BaseFont baseFont) throws IOException {
+    public static TextFlow createTextFlowFromMarkup(final String markup, final float fontSize, final BaseFont baseFont) throws IOException {
         return createTextFlowFromMarkup(markup, fontSize,
                 baseFont.getPlainFont(), baseFont.getBoldFont(),
                 baseFont.getItalicFont(), baseFont.getBoldItalicFont());
@@ -106,7 +109,7 @@ public class TextFlowUtil {
                                                     final PDFont boldItalicFont) throws IOException {
         final Iterable<CharSequence> parts = fromMarkup(markup);
         return createTextFlow(parts, fontSize, plainFont, boldFont, italicFont,
-                boldItalicFont);
+                boldItalicFont, null);
     }
 
     /**
@@ -124,12 +127,11 @@ public class TextFlowUtil {
     protected static TextFlow createTextFlow(
             final Iterable<CharSequence> parts, final float fontSize,
             final PDFont plainFont, final PDFont boldFont,
-            final PDFont italicFont, final PDFont boldItalicFont)
-            throws IOException {
+            final PDFont italicFont, final PDFont boldItalicFont, Integer color) throws IOException {
         final TextFlow result = new TextFlow();
         boolean bold = false;
         boolean italic = false;
-        int color = Color.BLACK;
+        color = color == null ? Color.BLACK : color;
         MetricsControlCharacter metricsControl = null;
         Map<Class<? extends Annotation>, Annotation> annotationMap = new HashMap<Class<? extends Annotation>, Annotation>();
         Stack<IndentCharacter> indentStack = new Stack<IndentCharacter>();
@@ -281,10 +283,8 @@ public class TextFlowUtil {
         text = splitByControlCharacter(ControlCharacters.ITALIC_FACTORY, text);
         text = splitByControlCharacter(ControlCharacters.COLOR_FACTORY, text);
 
-        for (AnnotationControlCharacterFactory<?> annotationControlCharacterFactory : AnnotationCharacters
-                .getFactories()) {
-            text = splitByControlCharacter(annotationControlCharacterFactory,
-                    text);
+        for (AnnotationControlCharacterFactory<?> annotationControlCharacterFactory : AnnotationCharacters.getFactories()) {
+            text = splitByControlCharacter(annotationControlCharacterFactory, text);
         }
 
         text = splitByControlCharacter(IndentCharacters.INDENT_FACTORY, text);
@@ -302,9 +302,7 @@ public class TextFlowUtil {
      * @param markup                  the markup to split.
      * @return the splitted and replaced sequence.
      */
-    protected static Iterable<CharSequence> splitByControlCharacter(
-            ControlCharacterFactory controlCharacterFactory,
-            final Iterable<CharSequence> markup) {
+    protected static Iterable<CharSequence> splitByControlCharacter(ControlCharacterFactory controlCharacterFactory, final Iterable<CharSequence> markup) {
         List<CharSequence> result = new ArrayList<CharSequence>();
         boolean beginOfLine = true;
         for (CharSequence current : markup) {
@@ -312,10 +310,8 @@ public class TextFlowUtil {
                 String string = (String) current;
                 int begin = 0;
 
-                if (!controlCharacterFactory.patternMatchesBeginOfLine()
-                        || beginOfLine) {
-                    Matcher matcher = controlCharacterFactory.getPattern()
-                            .matcher(string);
+                if (!controlCharacterFactory.patternMatchesBeginOfLine() || beginOfLine) {
+                    Matcher matcher = controlCharacterFactory.getPattern().matcher(string);
                     while (matcher.find()) {
                         String part = string.substring(begin, matcher.start());
                         begin = matcher.end();
@@ -326,8 +322,7 @@ public class TextFlowUtil {
                             result.add(unescaped);
                         }
 
-                        result.add(controlCharacterFactory
-                                .createControlCharacter(string, matcher, result));
+                        result.add(controlCharacterFactory.createControlCharacter(string, matcher, result));
                     }
                 }
 
@@ -349,8 +344,7 @@ public class TextFlowUtil {
         return result;
     }
 
-    private static Iterable<CharSequence> unescapeBackslash(
-            final Iterable<CharSequence> chars) {
+    private static Iterable<CharSequence> unescapeBackslash(final Iterable<CharSequence> chars) {
         List<CharSequence> result = new ArrayList<CharSequence>();
         for (CharSequence current : chars) {
             if (current instanceof String) {

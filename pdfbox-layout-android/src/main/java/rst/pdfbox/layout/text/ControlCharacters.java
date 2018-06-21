@@ -27,7 +27,7 @@ public class ControlCharacters {
      * fly from the control pattern. This allows to parameterize the characters
      * as needed for e.g. colors.
      */
-    public static interface ControlCharacterFactory {
+    public interface ControlCharacterFactory {
 
         /**
          * Creates the control character from the given matched pattern.
@@ -182,8 +182,7 @@ public class ControlCharacters {
 
     }
 
-    private static class ColorControlCharacterFactory implements
-            ControlCharacterFactory {
+    private static class ColorControlCharacterFactory implements ControlCharacterFactory {
 
         private final static Pattern PATTERN = Pattern
                 .compile("(?<!\\\\)(\\\\\\\\)*\\{color:#(\\p{XDigit}{6})\\}");
@@ -191,8 +190,7 @@ public class ControlCharacters {
         private final static String TO_ESCAPE = "{";
 
         @Override
-        public ControlCharacter createControlCharacter(String text,
-                                                       Matcher matcher, final List<CharSequence> charactersSoFar) {
+        public ControlCharacter createControlCharacter(String text, Matcher matcher, final List<CharSequence> charactersSoFar) {
             return new ColorControlCharacter(matcher.group(2));
         }
 
@@ -203,8 +201,7 @@ public class ControlCharacters {
 
         @Override
         public String unescape(String text) {
-            return text
-                    .replaceAll("\\\\" + Pattern.quote(TO_ESCAPE), TO_ESCAPE);
+            return text.replaceAll("\\\\" + Pattern.quote(TO_ESCAPE), TO_ESCAPE);
         }
 
         @Override

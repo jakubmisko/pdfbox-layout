@@ -23,8 +23,7 @@ public class TextSequenceUtil {
      * @return the list of text lines.
      * @throws IOException by pdfbox
      */
-    public static List<TextLine> getLines(final TextSequence text)
-            throws IOException {
+    public static List<TextLine> getLines(final TextSequence text) {
         final List<TextLine> result = new ArrayList<TextLine>();
 
         TextLine line = new TextLine();
@@ -107,8 +106,7 @@ public class TextSequenceUtil {
      * @return the word-wrapped text.
      * @throws IOException by pdfbox
      */
-    public static TextFlow wordWrap(final TextSequence text,
-                                    final float maxWidth) throws IOException {
+    public static TextFlow wordWrap(final TextSequence text, final float maxWidth) throws IOException {
 
         float indentation = 0;
         TextFlow result = new TextFlow();
@@ -134,8 +132,7 @@ public class TextSequenceUtil {
             } else {
                 TextFlow words = splitWords(fragment);
                 for (TextFragment word : words) {
-                    WordWrapContext context = new WordWrapContext(word,
-                            lineLength, indentation, isWrappedLine);
+                    WordWrapContext context = new WordWrapContext(word, lineLength, indentation, isWrappedLine);
                     do {
                         context = wordWrap(context, maxWidth, result);
                     } while (context.isMoreToWrap());
@@ -273,7 +270,7 @@ public class TextSequenceUtil {
      * @return the de-wrapped text.
      * @throws IOException by PDFBox
      */
-    public static TextFlow deWrap(final TextSequence text) throws IOException {
+    public static TextFlow deWrap(final TextSequence text) {
         TextFlow result = new TextFlow();
         for (TextFragment fragment : text) {
             if (fragment instanceof WrappingNewLine) {
@@ -440,8 +437,7 @@ public class TextSequenceUtil {
     public static void drawText(TextSequence text,
                                 PDPageContentStream contentStream, Position upperLeft,
                                 DrawListener drawListener, Alignment alignment, float maxWidth,
-                                final float lineSpacing, final boolean applyLineSpacingToFirstLine)
-            throws IOException {
+                                final float lineSpacing, final boolean applyLineSpacingToFirstLine) throws IOException {
         List<TextLine> lines = wordWrapToLines(text, maxWidth);
         float maxLineWidth = Math.max(maxWidth, getMaxWidth(lines));
         Position position = upperLeft;
