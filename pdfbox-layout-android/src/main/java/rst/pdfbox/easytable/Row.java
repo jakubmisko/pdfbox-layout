@@ -99,8 +99,13 @@ public class Row {
         }
     }
 
-    public static Row buildRow(CustomContentDrawer onCustomDraw) {
-        Row row = new Row(new ArrayList<>());
+    public static Row buildRow(CustomContentDrawer onCustomDraw, float height) {
+        Row row = new Row(new ArrayList<>()) {
+            @Override
+            float getHeightWithoutFontHeight() {
+                return height;
+            }
+        };
         row.setOnCustomDraw(onCustomDraw);
         return row;
     }
