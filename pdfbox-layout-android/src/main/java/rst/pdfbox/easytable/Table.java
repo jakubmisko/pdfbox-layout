@@ -102,7 +102,7 @@ public class Table {
         private Table table = new Table(rows, columns);
 
         public TableBuilder addRow(Row row) {
-            if (row.getCells().size() != numberOfColumns && row.getOnCustomDraw() != null) {
+            if (row.getCells().size() != numberOfColumns && row.getOnCustomDraw() == null) {
                 throw new IllegalArgumentException(
                         "Number withText row cells does not match with number withText table columns");
             }
