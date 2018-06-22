@@ -29,30 +29,33 @@ public class TableDrawer {
     }
 
     private void drawBackgroundAndText() throws IOException {
-        float startX;
+        float startX = tableStartX;
         float startY = tableStartY;
 
         for (Row row : table.getRows()) {
-            final float rowHeight = table.getFontHeight() + row.getHeightWithoutFontHeight();
-            int columnCounter = 0;
+            if (row.getOnCustomDraw() != null) {
+                row.getOnCustomDraw().draw(contentStream, startX, startY);
+            } else {
+                final float rowHeight = table.getFontHeight() + row.getHeightWithoutFontHeight();
+                int columnCounter = 0;
+                
+                startY -= rowHeight;
 
-            startX = tableStartX;
-            startY -= rowHeight;
+                for (Cell cell : row.getCells()) {
+                    final float columnWidth = table.getColumns().get(columnCounter).getWidth();
+                    // Handle the cell's background color
+                    if (cell.hasBackgroundColor()) {
+                        drawCellBackground(cell, startX, startY, columnWidth, rowHeight);
+                    }
 
-            for (Cell cell : row.getCells()) {
-                final float columnWidth = table.getColumns().get(columnCounter).getWidth();
-                // Handle the cell's background color
-                if (cell.hasBackgroundColor()) {
-                    drawCellBackground(cell, startX, startY, columnWidth, rowHeight);
+                    // Handle the cell's text
+                    if (cell.hasText()) {
+                        drawCellText(cell, columnWidth, startX, startY);
+                    }
+
+                    startX += columnWidth;
+                    columnCounter++;
                 }
-
-                // Handle the cell's text
-                if (cell.hasText()) {
-                    drawCellText(cell, columnWidth, startX, startY);
-                }
-
-                startX += columnWidth;
-                columnCounter++;
             }
         }
     }

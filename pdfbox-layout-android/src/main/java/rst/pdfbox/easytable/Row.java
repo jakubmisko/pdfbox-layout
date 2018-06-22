@@ -2,6 +2,9 @@ package rst.pdfbox.easytable;
 
 import android.support.annotation.ColorInt;
 
+import com.tom_roush.pdfbox.pdmodel.PDPageContentStream;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +14,7 @@ public class Row {
     private Table table;
     private final List<Cell> cells;
     private Integer borderColor;
+    private CustomContentDrawer onCustomDraw;
 
     private Row(final List<Cell> cells) {
         super();
@@ -18,6 +22,14 @@ public class Row {
         for (final Cell cell : cells) {
             cell.setRow(this);
         }
+    }
+
+    public void setOnCustomDraw(CustomContentDrawer onCustomDraw) {
+        this.onCustomDraw = onCustomDraw;
+    }
+
+    public CustomContentDrawer getOnCustomDraw() {
+        return onCustomDraw;
     }
 
     public Table getTable() {
@@ -85,6 +97,16 @@ public class Row {
             }
             return row;
         }
+    }
+
+    public static Row buildRow(CustomContentDrawer onCustomDraw) {
+        Row row = new Row(new ArrayList<>());
+        row.setOnCustomDraw(onCustomDraw);
+        return row;
+    }
+
+    public interface CustomContentDrawer {
+        void draw(PDPageContentStream contentStream, float startX, float startY);
     }
 
 }
