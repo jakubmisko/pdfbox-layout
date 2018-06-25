@@ -86,7 +86,7 @@ public class ControlCharacters {
     /**
      * The factory for metrics control characters.
      */
-    public static MetricsControlCharacterFactory METRICS_FACTORY = new MetricsControlCharacterFactory();
+//    public static MetricsControlCharacterFactory METRICS_FACTORY = new MetricsControlCharacterFactory();
 
     /**
      * An asterisk ('*') indicates switching of bold font mode in markup. It can

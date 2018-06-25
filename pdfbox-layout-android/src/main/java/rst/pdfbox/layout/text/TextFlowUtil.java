@@ -278,7 +278,7 @@ public class TextFlowUtil {
             final Iterable<CharSequence> markup) {
         Iterable<CharSequence> text = markup;
         text = splitByControlCharacter(ControlCharacters.NEWLINE_FACTORY, text);
-        text = splitByControlCharacter(ControlCharacters.METRICS_FACTORY, text);
+//        text = splitByControlCharacter(ControlCharacters.METRICS_FACTORY, text);
         text = splitByControlCharacter(ControlCharacters.BOLD_FACTORY, text);
         text = splitByControlCharacter(ControlCharacters.ITALIC_FACTORY, text);
         text = splitByControlCharacter(ControlCharacters.COLOR_FACTORY, text);
