@@ -29,10 +29,11 @@ public class TableDrawer {
     }
 
     private void drawBackgroundAndText() throws IOException {
-        float startX = tableStartX;
         float startY = tableStartY;
 
         for (Row row : table.getRows()) {
+            float startX = tableStartX;
+
             if (row.getOnCustomDraw() != null) {
                 row.getOnCustomDraw().draw(contentStream, startX, startY);
             } else {
