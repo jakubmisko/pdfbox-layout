@@ -55,12 +55,12 @@ public class HorizontalRuler implements Drawable, Element, WidthRespecting {
     }
 
     @Override
-    public float getWidth() throws IOException {
+    public float getWidth() {
         return getMaxWidth();
     }
 
     @Override
-    public float getHeight() throws IOException {
+    public float getHeight() {
         if (getStroke() == null) {
             return 0f;
         }
@@ -82,7 +82,8 @@ public class HorizontalRuler implements Drawable, Element, WidthRespecting {
             getStroke().applyTo(contentStream);
             float x = upperLeft.getX();
             float y = upperLeft.getY() - getStroke().getLineWidth() / 2;
-            contentStream.addLine(x, y, x + getWidth(), y);
+            contentStream.moveTo(x, y);
+            contentStream.lineTo(x + getWidth(), y);
             contentStream.stroke();
         }
         if (drawListener != null) {
