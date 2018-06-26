@@ -1,10 +1,7 @@
 package rst.pdfbox.layout.elements;
 
-import android.graphics.Bitmap;
-
 import com.tom_roush.pdfbox.pdmodel.PDDocument;
 import com.tom_roush.pdfbox.pdmodel.PDPageContentStream;
-import com.tom_roush.pdfbox.pdmodel.graphics.image.JPEGFactory;
 import com.tom_roush.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 import java.io.IOException;
@@ -22,13 +19,13 @@ public class ImageElement implements Element, Drawable, Dividable,
      */
     public final static float SCALE_TO_RESPECT_WIDTH = -1f;
 
-    private Bitmap image;
+    private PDImageXObject image;
     private float width;
     private float height;
     private float maxWidth = -1;
     private Position absolutePosition;
 
-    public ImageElement(final Bitmap image) {
+    public ImageElement(final PDImageXObject image) {
         this.image = image;
         this.width = image.getWidth();
         this.height = image.getHeight();
@@ -115,8 +112,7 @@ public class ImageElement implements Element, Drawable, Dividable,
 
     @Override
     public void draw(PDDocument pdDocument, PDPageContentStream contentStream, Position upperLeft, DrawListener drawListener) throws IOException {
-        PDImageXObject imagePd = JPEGFactory.createFromImage(pdDocument, image);
-        contentStream.drawImage(imagePd, upperLeft.getX(), upperLeft.getY());
+        contentStream.drawImage(image, upperLeft.getX(), upperLeft.getY());
         if (drawListener != null) {
             drawListener.drawn(this, upperLeft, getWidth(), getHeight());
         }
