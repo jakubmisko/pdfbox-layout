@@ -2,14 +2,11 @@ package rst.pdfbox.layout.elements;
 
 import android.graphics.Bitmap;
 
-import com.tom_roush.pdfbox.cos.COSName;
 import com.tom_roush.pdfbox.pdmodel.PDDocument;
 import com.tom_roush.pdfbox.pdmodel.PDPageContentStream;
-import com.tom_roush.pdfbox.pdmodel.graphics.color.PDDeviceRGB;
+import com.tom_roush.pdfbox.pdmodel.graphics.image.JPEGFactory;
 import com.tom_roush.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import rst.pdfbox.layout.text.DrawListener;
@@ -118,11 +115,7 @@ public class ImageElement implements Element, Drawable, Dividable,
 
     @Override
     public void draw(PDDocument pdDocument, PDPageContentStream contentStream, Position upperLeft, DrawListener drawListener) throws IOException {
-//	CompatibilityHelper.drawImage(image, pdDocument, contentStream,
-//		upperLeft, getWidth(), getHeight());
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
-        PDImageXObject imagePd = new PDImageXObject(pdDocument, new ByteArrayInputStream(outputStream.toByteArray()), COSName.DCT_DECODE, (int) getWidth(), (int) getHeight(), 8, PDDeviceRGB.INSTANCE);
+        PDImageXObject imagePd = JPEGFactory.createFromImage(pdDocument, image);
         contentStream.drawImage(imagePd, upperLeft.getX(), upperLeft.getY());
         if (drawListener != null) {
             drawListener.drawn(this, upperLeft, getWidth(), getHeight());
