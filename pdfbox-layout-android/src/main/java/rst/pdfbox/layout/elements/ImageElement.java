@@ -112,7 +112,7 @@ public class ImageElement implements Element, Drawable, Dividable,
 
     @Override
     public void draw(PDDocument pdDocument, PDPageContentStream contentStream, Position upperLeft, DrawListener drawListener) throws IOException {
-        contentStream.drawImage(image, upperLeft.getX(), upperLeft.getY());
+        contentStream.drawImage(image, upperLeft.getX(), upperLeft.getY() - image.getHeight());
         if (drawListener != null) {
             drawListener.drawn(this, upperLeft, getWidth(), getHeight());
         }
