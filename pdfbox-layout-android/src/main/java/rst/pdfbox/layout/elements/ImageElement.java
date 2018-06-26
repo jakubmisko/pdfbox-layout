@@ -2,6 +2,7 @@ package rst.pdfbox.layout.elements;
 
 import android.graphics.Bitmap;
 
+import com.tom_roush.pdfbox.cos.COSName;
 import com.tom_roush.pdfbox.pdmodel.PDDocument;
 import com.tom_roush.pdfbox.pdmodel.PDPageContentStream;
 import com.tom_roush.pdfbox.pdmodel.graphics.color.PDDeviceRGB;
@@ -37,7 +38,7 @@ public class ImageElement implements Element, Drawable, Dividable,
     }
 
     @Override
-    public float getWidth() throws IOException {
+    public float getWidth() {
         if (width == SCALE_TO_RESPECT_WIDTH) {
             if (getMaxWidth() > 0 && image.getWidth() > getMaxWidth()) {
                 return getMaxWidth();
@@ -59,7 +60,7 @@ public class ImageElement implements Element, Drawable, Dividable,
     }
 
     @Override
-    public float getHeight() throws IOException {
+    public float getHeight() {
         if (height == SCALE_TO_RESPECT_WIDTH) {
             if (getMaxWidth() > 0 && image.getWidth() > getMaxWidth()) {
                 return getMaxWidth() / (float) image.getWidth()
@@ -116,13 +117,12 @@ public class ImageElement implements Element, Drawable, Dividable,
     }
 
     @Override
-    public void draw(PDDocument pdDocument, PDPageContentStream contentStream,
-                     Position upperLeft, DrawListener drawListener) throws IOException {
+    public void draw(PDDocument pdDocument, PDPageContentStream contentStream, Position upperLeft, DrawListener drawListener) throws IOException {
 //	CompatibilityHelper.drawImage(image, pdDocument, contentStream,
 //		upperLeft, getWidth(), getHeight());
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
-        PDImageXObject imagePd = new PDImageXObject(pdDocument, new ByteArrayInputStream(outputStream.toByteArray()), null, (int) getWidth(), (int) getHeight(), 128, PDDeviceRGB.INSTANCE);
+        PDImageXObject imagePd = new PDImageXObject(pdDocument, new ByteArrayInputStream(outputStream.toByteArray()), COSName.DCT_DECODE, (int) getWidth(), (int) getHeight(), 8, PDDeviceRGB.INSTANCE);
         contentStream.drawImage(imagePd, upperLeft.getX(), upperLeft.getY());
         if (drawListener != null) {
             drawListener.drawn(this, upperLeft, getWidth(), getHeight());
